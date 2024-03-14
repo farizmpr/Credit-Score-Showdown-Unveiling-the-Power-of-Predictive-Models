@@ -16,3 +16,46 @@ The project employs a random forest model and logistic regression models, with a
 -  For environments with less stringent interpretability requirements, the random forest model is recommended due to its high accuracy.
 -  Where regulatory compliance and model interpretability are crucial, logistic regression with WOE is advisable. Consideration of imbalance handling depends on the priority of balanced accuracy across classes.
 -  Further analysis of influential variables and integration of comprehensive financial records are suggested to enhance model performance.
+## Result
+### Reference Categories
+
+| Category                     | Reference Value |
+|------------------------------|-----------------|
+| COMPANY                      | Y               |
+| MARITAL                      | 1               |
+| MONTHS_IN_RESIDENCE          | >60             |
+| MONTHS_IN_THE_JOB            | <0              |
+| OCC_TYPE                     | 4.0             |
+| PAYMENT_DAY                  | 25              |
+| PERSONAL_MONTHLY_INCOME      | 845-1238.872    |
+| PRODUCT                      | 7               |
+| POSTAL_CODE                  | 2               |
+| RESI_TYPE                    | 2               |
+| STATE_RESI                   | SE              |
+| EDUCATIONAL                  | 0.0             |
+| AGE                          | >83             |
+
+### Results for Logistic Regression with WOE
+
+| Class        | Precision | Recall | F1-score | Support |
+|--------------|-----------|--------|----------|---------|
+| Bad Class (0) | 0.67      | 0      | 0        | 2,664   |
+| Good Class (1)| 0.73      | 1.0    | 0.85     | 7,336   |
+| **Accuracy**  |           |        | 0.73     | 10,000  |
+
+### Results for Logistic Regression with WOE + Imbalance Handling
+
+| Class        | Precision | Recall | F1-score | Support |
+|--------------|-----------|--------|----------|---------|
+| Bad Class (0) | 0.56      | 0.55   | 0.55     | 7,417   |
+| Good Class (1)| 0.55      | 0.57   | 0.56     | 7,367   |
+| **Accuracy**  |           |        | 0.56     | 14,784  |
+
+### Comparative Analysis Results
+
+| Models                           | Accuracy Rate | AUC  | GINI  |
+|----------------------------------|---------------|------|-------|
+| LogR: Imbalance handling         | 0.50          | 0.49 | -0.001|
+| LogR: WOE                         | 0.73          | 0.60 | 0.19  |
+| LogR: Imbalance handling, WOE    | 0.56          | 0.56 | 0.11  |
+| Random Forest                    | 0.86          | 0.86 | 0.71  |
